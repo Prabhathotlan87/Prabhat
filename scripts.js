@@ -1,159 +1,107 @@
-let currentUserId = null;
+const postsContainer = document.getElementById('postsContainer');
+const postButton = document.getElementById('postButton');
+const postContent = document.getElementById('postContent');
 
-// Register a new user
-async function registerUser() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+let posts = []; // This will act as our in-memory database
 
-  if (!username || !password) {
-    alert("Please fill in both fields!");
-    return;
-  }
-
-  try {
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+// Function to render posts
+function renderPosts() {
+    postsContainer.innerHTML = '';
+    posts.forEach((post, index) => {
+        const postDiv = document.createElement('div');
+        postDiv.classList.add('post');
+        postDiv.innerHTML = `
+            <div class="post-content">${post.content} <span class="likes">${post.likes} ❤️</span></div>
+            <button onclick="likePost(${index})">Like</button>
+            <button onclick="deletePost(${index})">Delete Post</button>
+            <div class="comments">
+                <input type="text" id="usernameInput${index}" placeholder="Your username" required>
+                <input type="text" id="commentInput${index}" placeholder="Add a comment" required>
+                <button onclick="addComment(${index})">Comment</button>
+                <div class="comment-list" id="commentList${index}">
+                    ${post.comments.map((comment, commentIndex) => `
+                        <div class="comment">
+                            <strong>${comment.username}:</strong> ${comment.text}
+                            <button onclick="deleteComment(${index}, ${commentIndex})">Delete</button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="emoji-container">
+                <span class="emoji" onclick="addEmoji(${index}, '😊')">😊</span>
+                <span class="emoji" onclick="addEmoji(${index}, '😢')">😢</span>
+                <span class="emoji" onclick="addEmoji(${index}, '😂')">😂</span>
+                <span class="emoji" onclick="addEmoji(${index}, '😡')">😡</span>
+            </div>
+        `;
+        postsContainer.appendChild(postDiv);
     });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error during registration:", errorData.message);
-      alert("Failed to register: " + errorData.message);
-      return;
-    }
-
-    const data = await response.json();
-    currentUserId = data.id;
-    document.getElementById("registration").style.display = "none";
-    document.getElementById("feed").style.display = "block";
-    loadFeed();
-  } catch (error) {
-    console.error("Failed to fetch:", error);
-    alert(
-      "Error: Failed to connect to the server. Please ensure the server is running and try again."
-    );
-  }
 }
 
-// Create a new post
-async function createPost() {
-  const content = document.getElementById("postContent").value;
-
-  if (!content) {
-    alert("Please enter some content before posting!");
-    return;
-  }
-
-  try {
-    const response = await fetch("/api/posts/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content, authorId: currentUserId }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error creating post:", errorData.message);
-      alert("Failed to create post: " + errorData.message);
-      return;
+// Function to post new content
+postButton.addEventListener('click', () => {
+    const content = postContent.value.trim();
+    if (content) {
+        posts.push({ content, likes: 0, comments: [] });
+        postContent.value = '';
+        renderPosts();
+        updateLocalStorage(); // Save to local storage
     }
+});
 
-    document.getElementById("postContent").value = ""; // Clear the textarea after posting
-    loadFeed();
-  } catch (error) {
-    console.error("Failed to fetch:", error);
-    alert("Error: Failed to connect to the server. Please try again later.");
-  }
+// Function to like a post
+function likePost(index) {
+    posts[index].likes += 1;
+    renderPosts();
+    updateLocalStorage(); // Save to local storage
 }
 
-// Load the feed
-async function loadFeed() {
-  try {
-    const response = await fetch(`/api/posts/feed/${currentUserId}`);
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error loading feed:", errorData.message);
-      alert("Failed to load feed: " + errorData.message);
-      return;
-    }
-
-    const posts = await response.json();
-    const postsContainer = document.getElementById("posts");
-    postsContainer.innerHTML = ""; // Clear existing posts
-
-    posts.forEach((post) => {
-      const postDiv = document.createElement("div");
-      postDiv.className = "post";
-      postDiv.innerHTML = `<strong>User ${post.authorId}:</strong> ${post.content}`;
-      postsContainer.appendChild(postDiv);
-    });
-  } catch (error) {
-    console.error("Failed to fetch:", error);
-    alert("Error: Failed to connect to the server. Please try again later.");
-  }
+// Function to delete a post
+function deletePost(index) {
+    posts.splice(index, 1); // Remove the post from the array
+    renderPosts();
+    updateLocalStorage(); // Save to local storage
 }
 
-// Follow a user
-async function followUser() {
-  const followeeId = document.getElementById("followUserId").value;
-
-  if (!followeeId) {
-    alert("Please enter a User ID to follow!");
-    return;
-  }
-
-  try {
-    const response = await fetch("/api/follow", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ followerId: currentUserId, followeeId }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error following user:", errorData.message);
-      alert("Failed to follow: " + errorData.message);
-      return;
+// Function to add a comment
+function addComment(index) {
+    const usernameInput = document.getElementById(`usernameInput${index}`);
+    const commentInput = document.getElementById(`commentInput${index}`);
+    const username = usernameInput.value.trim();
+    const comment = commentInput.value.trim();
+    if (username && comment) {
+        posts[index].comments.push({ username, text: comment });
+        usernameInput.value = '';
+        commentInput.value = '';
+        renderPosts();
+        updateLocalStorage(); // Save to local storage
     }
-
-    alert("Followed successfully");
-    loadFeed(); // Refresh feed to show posts from new followee
-  } catch (error) {
-    console.error("Failed to fetch:", error);
-    alert("Error: Failed to connect to the server. Please try again later.");
-  }
 }
 
-// Unfollow a user
-async function unfollowUser() {
-  const followeeId = document.getElementById("followUserId").value;
+// Function to delete a comment
+function deleteComment(postIndex, commentIndex) {
+    posts[postIndex].comments.splice(commentIndex, 1); // Remove the comment from the array
+    renderPosts();
+    updateLocalStorage(); // Save to local storage
+}
 
-  if (!followeeId) {
-    alert("Please enter a User ID to unfollow!");
-    return;
-  }
+// Function to add an emoji
+function addEmoji(index, emoji) {
+    posts[index].comments.push({ username: 'Anonymous', text: emoji }); // Default to "Anonymous" for emojis
+    renderPosts();
+    updateLocalStorage(); // Save to local storage
+}
 
-  try {
-    const response = await fetch("/api/unfollow", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ followerId: currentUserId, followeeId }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error unfollowing user:", errorData.message);
-      alert("Failed to unfollow: " + errorData.message);
-      return;
+// Load posts from local storage on initial load
+window.onload = () => {
+    const storedPosts = JSON.parse(localStorage.getItem('posts'));
+    if (storedPosts) {
+        posts = storedPosts;
+        renderPosts();
     }
+};
 
-    alert("Unfollowed successfully");
-    loadFeed(); // Refresh feed to remove posts from unfollowed user
-  } catch (error) {
-    console.error("Failed to fetch:", error);
-    alert("Error: Failed to connect to the server. Please try again later.");
-  }
+// Update local storage whenever posts change
+function updateLocalStorage() {
+    localStorage.setItem('posts', JSON.stringify(posts));
 }
