@@ -1,15 +1,19 @@
 const restaurantMenus = {
     restaurant1: [
-        { id: 1, name: "Burger", price: 10, img: "images/burger.jpg" },
-        { id: 2, name: "Pizza", price: 15, img: "images/pizza.jpg" },
+        { id: 1, name: "Plain dosa", price: 10, img: "images/plaindosa.jpg" },
+        { id: 2, name: "Egg dosa", price: 15, img: "images/eggdosa.jpg" },
+        { id: 3, name:"Masala dosa", price:10 , img:"images/masaladosa.jpg"},
+        { id: 5, name:"uthappam", price:10 , img:"images/uthappam.jpg"},
+        { id: 6, name:"Rava dosa", price:10 , img:"images/ravadosa.jpg"},
     ],
     restaurant2: [
-        { id: 3, name: "Sushi", price: 20, img: "images/sushi.jpg" },
-        { id: 4, name: "Ramen", price: 12, img: "images/ramen.jpg" },
+        { id: 7, name: "Idly", price: 20, img: "images/.jpg" },
+        { id: 8, name: "Podi idly", price: 12, img: "images/.jpg" },
+        { id: 9, name:"sambar idly", price:10 , img:""},
     ],
     restaurant3: [
-        { id: 5, name: "Pasta", price: 12, img: "images/pasta.jpg" },
-        { id: 6, name: "Salad", price: 8, img: "images/salad.jpg" },
+        { id: 10, name: "Veg meal", price: 12, img: "images/.jpg" },
+        { id: 11, name: "Nonveg Meal", price: 8, img: "images/.jpg" },
     ],
 };
 
