@@ -2,7 +2,7 @@ const postsContainer = document.getElementById('postsContainer');
 const postButton = document.getElementById('postButton');
 const postContent = document.getElementById('postContent');
 
-let posts = []; // This will act as our in-memory database
+let posts = []; // In-memory database
 
 // Function to render posts
 function renderPosts() {
@@ -11,9 +11,16 @@ function renderPosts() {
         const postDiv = document.createElement('div');
         postDiv.classList.add('post');
         postDiv.innerHTML = `
-            <div class="post-content">${post.content} <span class="likes">${post.likes} ❤️</span></div>
+            <div class="post-content">
+                ${post.content} 
+                <span class="likes">${post.likes} ❤️</span>
+                <span class="post-date">${new Date(post.date).toLocaleString()}</span>
+            </div>
             <button onclick="likePost(${index})">Like</button>
             <button onclick="deletePost(${index})">Delete Post</button>
+            <button id="followButton${index}" onclick="toggleFollow(${index})">
+                ${post.following ? 'Unfollow' : 'Follow'}
+            </button>
             <div class="comments">
                 <input type="text" id="usernameInput${index}" placeholder="Your username" required>
                 <input type="text" id="commentInput${index}" placeholder="Add a comment" required>
@@ -42,10 +49,10 @@ function renderPosts() {
 postButton.addEventListener('click', () => {
     const content = postContent.value.trim();
     if (content) {
-        posts.push({ content, likes: 0, comments: [] });
+        posts.push({ content, likes: 0, comments: [], following: false, date: new Date() });
         postContent.value = '';
         renderPosts();
-        updateLocalStorage(); // Save to local storage
+        updateLocalStorage();
     }
 });
 
@@ -53,14 +60,21 @@ postButton.addEventListener('click', () => {
 function likePost(index) {
     posts[index].likes += 1;
     renderPosts();
-    updateLocalStorage(); // Save to local storage
+    updateLocalStorage();
 }
 
 // Function to delete a post
 function deletePost(index) {
-    posts.splice(index, 1); // Remove the post from the array
+    posts.splice(index, 1);
     renderPosts();
-    updateLocalStorage(); // Save to local storage
+    updateLocalStorage();
+}
+
+// Function to follow/unfollow a post
+function toggleFollow(index) {
+    posts[index].following = !posts[index].following;
+    renderPosts();
+    updateLocalStorage();
 }
 
 // Function to add a comment
@@ -74,22 +88,22 @@ function addComment(index) {
         usernameInput.value = '';
         commentInput.value = '';
         renderPosts();
-        updateLocalStorage(); // Save to local storage
+        updateLocalStorage();
     }
 }
 
 // Function to delete a comment
 function deleteComment(postIndex, commentIndex) {
-    posts[postIndex].comments.splice(commentIndex, 1); // Remove the comment from the array
+    posts[postIndex].comments.splice(commentIndex, 1);
     renderPosts();
-    updateLocalStorage(); // Save to local storage
+    updateLocalStorage();
 }
 
 // Function to add an emoji
 function addEmoji(index, emoji) {
-    posts[index].comments.push({ username: 'Anonymous', text: emoji }); // Default to "Anonymous" for emojis
+    posts[index].comments.push({ username: 'Anonymous', text: emoji });
     renderPosts();
-    updateLocalStorage(); // Save to local storage
+    updateLocalStorage();
 }
 
 // Load posts from local storage on initial load
