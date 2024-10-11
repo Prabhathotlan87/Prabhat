@@ -1,6 +1,7 @@
+/* General Body Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f4f8;
+    background-color: #ffeb3b; /* Bright yellow background */
     color: #333;
     margin: 0;
     padding: 20px;
@@ -9,17 +10,22 @@ body {
 .container {
     max-width: 600px;
     margin: auto;
-    background: white;
+    background: #ff5722; /* Bright orange container */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); /* Deeper shadow for depth */
 }
 
+/* Heading Styling */
 h1 {
     text-align: center;
-    color: #007bff;
+    color: #ffffff; /* White color for heading */
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
+/* Form Styling */
 .post-form {
     margin-bottom: 20px;
 }
@@ -27,69 +33,153 @@ h1 {
 textarea {
     width: 100%;
     height: 100px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: border 0.3s;
+    padding: 14px;
+    border: 2px solid #ffd54f; /* Golden yellow border */
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 textarea:focus {
-    border-color: #007bff;
+    border-color: #ffffff; /* White border on focus */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* White glow effect */
     outline: none;
 }
 
+/* Button Styling */
 button {
-    padding: 12px 20px;
-    background-color: #007bff;
+    padding: 12px 24px;
+    background-color: #4caf50; /* Bright green button */
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s, transform 0.2s;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+    background-color: #388e3c; /* Darker green on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(56, 142, 60, 0.3); /* Green shadow on hover */
 }
 
+/* Post Styling */
 .post {
-    border: 1px solid #ddd;
+    border: 1px solid #ffd54f; /* Golden yellow border for posts */
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    transition: transform 0.2s;
+    border-radius: 10px;
+    background-color: #ffffff; /* White background for posts */
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .post:hover {
-    transform: translateY(-2px);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(255, 213, 79, 0.3);
 }
 
 .post-content {
-    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
 }
 
+.post-date {
+    font-size: 12px;
+    color: #ffeb3b; /* Bright yellow for post date */
+    margin-left: 10px;
+    font-style: italic;
+}
+
+/* Comments Section */
 .comments {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .comment {
-    padding: 8px 0;
-    border-top: 1px solid #eee;
+    padding: 10px 0;
+    border-top: 1px solid #ffd54f;
+    font-size: 14px;
+    color: #555;
 }
 
 .comment:first-child {
     border-top: none;
 }
 
+strong {
+    color: #ff5722; /* Orange for usernames */
+}
+
+/* Emoji Section */
+.emoji-container {
+    margin-top: 10px;
+}
+
 .emoji {
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 8px;
+    font-size: 24px;
     transition: transform 0.2s;
 }
 
 .emoji:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
+}
+
+/* Follow/Unfollow Button */
+#followButton {
+    background-color: #2196f3; /* Bright blue for follow/unfollow */
+    color: white;
+    font-size: 14px;
+}
+
+#followButton:hover {
+    background-color: #1976d2; /* Darker blue on hover */
+}
+
+/* Comment Inputs Styling */
+.comments input[type="text"] {
+    width: calc(100% - 60px);
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-right: 5px;
+    transition: border-color 0.3s;
+}
+
+.comments input[type="text"]:focus {
+    border-color: #ffeb3b; /* Bright yellow on focus */
+}
+
+.comments button {
+    background-color: #ffa07a; /* Light salmon button for comments */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.comments button:hover {
+    background-color: #ff6347; /* Tomato color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    button, .comments button {
+        font-size: 14px;
+    }
 }
