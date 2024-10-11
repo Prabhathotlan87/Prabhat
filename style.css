@@ -46,6 +46,12 @@ textarea:focus {
     outline: none;
 }
 
+/* Input for File Upload */
+input[type="file"] {
+    display: block;
+    margin-top: 10px;
+}
+
 /* Button Styling */
 button {
     padding: 12px 24px;
@@ -78,6 +84,14 @@ button:hover {
 .post:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 15px rgba(255, 213, 79, 0.3);
+}
+
+/* Styling for the post image */
+.post-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
 }
 
 .post-content {
