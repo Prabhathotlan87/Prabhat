@@ -1,6 +1,7 @@
 const postsContainer = document.getElementById('postsContainer');
 const postButton = document.getElementById('postButton');
 const postContent = document.getElementById('postContent');
+const imageInput = document.getElementById('imageInput');
 
 let posts = []; // In-memory database
 
@@ -12,7 +13,8 @@ function renderPosts() {
         postDiv.classList.add('post');
         postDiv.innerHTML = `
             <div class="post-content">
-                ${post.content} 
+                ${post.content}
+                ${post.image ? `<img src="${post.image}" class="post-image" alt="Post Image">` : ''}
                 <span class="likes">${post.likes} ❤️</span>
                 <span class="post-date">${new Date(post.date).toLocaleString()}</span>
             </div>
@@ -48,11 +50,27 @@ function renderPosts() {
 // Function to post new content
 postButton.addEventListener('click', () => {
     const content = postContent.value.trim();
-    if (content) {
-        posts.push({ content, likes: 0, comments: [], following: false, date: new Date() });
-        postContent.value = '';
-        renderPosts();
-        updateLocalStorage();
+    const image = imageInput.files[0];
+
+    if (content || image) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imageUrl = event.target.result;
+            posts.push({ content, image: image ? imageUrl : null, likes: 0, comments: [], following: false, date: new Date() });
+            postContent.value = '';
+            imageInput.value = '';
+            renderPosts();
+            updateLocalStorage();
+        };
+
+        if (image) {
+            reader.readAsDataURL(image); // Read the uploaded image file
+        } else {
+            posts.push({ content, image: null, likes: 0, comments: [], following: false, date: new Date() });
+            postContent.value = '';
+            renderPosts();
+            updateLocalStorage();
+        }
     }
 });
 
