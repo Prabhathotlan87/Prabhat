@@ -32,20 +32,6 @@ function displayMenu(restaurant) {
                 <h3>${item.name}</h3>
                 <p>Price: $${item.price}</p>
                 <button id="add-to-cart-${item.id}" onclick="addToOrder(${item.id})">Add to Cart</button>
-                <div class="feedback-section">
-                    <label for="rating-${item.id}">Rating:</label>
-                    <select id="rating-${item.id}">
-                        <option value="0">Select Rating</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <input type="text" id="feedback-${item.id}" placeholder="Leave a comment">
-                    <button onclick="submitFeedback(${item.id})">Submit Feedback</button>
-                    <div id="feedback-list-${item.id}"></div>
-                </div>
             </div>
         `;
         menuContainer.appendChild(div);
@@ -135,25 +121,38 @@ document.getElementById('place-order').onclick = function() {
     }
 };
 
-// Function to submit feedback
-function submitFeedback(itemId) {
-    const rating = document.getElementById(`rating-${itemId}`).value;
-    const feedback = document.getElementById(`feedback-${itemId}`).value;
-    const feedbackList = document.getElementById(`feedback-list-${itemId}`);
+// Handle star rating
+const stars = document.querySelectorAll('.star');
+let selectedRating = 0;
 
-    if (rating === "0") {
+stars.forEach(star => {
+    star.addEventListener('click', function() {
+        selectedRating = this.getAttribute('data-value');
+        stars.forEach(s => {
+            s.style.color = s.getAttribute('data-value') <= selectedRating ? '#ffcc00' : '#fff';
+        });
+    });
+});
+
+// Function to submit feedback
+document.getElementById('submit-feedback').onclick = function() {
+    const feedback = document.getElementById('order-feedback').value;
+    const feedbackList = document.getElementById('feedback-list');
+
+    if (selectedRating === "0") {
         alert('Please select a rating.');
         return;
     }
 
     const feedbackItem = document.createElement('div');
-    feedbackItem.innerHTML = `<strong>Rating: ${rating}</strong> - ${feedback}`;
+    feedbackItem.innerHTML = `<strong>Rating: ${selectedRating}</strong> - ${feedback}`;
     feedbackList.appendChild(feedbackItem);
 
     // Clear input fields
-    document.getElementById(`rating-${itemId}`).value = "0";
-    document.getElementById(`feedback-${itemId}`).value = '';
-}
+    selectedRating = 0;
+    stars.forEach(s => s.style.color = '#fff'); // Reset star color
+    document.getElementById('order-feedback').value = '';
+};
 
 // Event listener for restaurant selection
 document.getElementById('restaurant-select').addEventListener('change', function() {
