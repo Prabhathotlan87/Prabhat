@@ -96,9 +96,15 @@ button:hover {
     margin-top: 20px;
 }
 
-.feedback-section input[type="text"],
-.feedback-section select {
-    margin: 10px 0;
+#rating-stars {
+    display: flex;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 30px;
+    color: #ffcc00; /* Star color */
+    margin-right: 5px;
 }
 
 footer {
