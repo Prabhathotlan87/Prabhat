@@ -2,14 +2,14 @@ const restaurantMenus = {
     restaurant1: [
         { id: 1, name: "Plain dosa", price: 10, img: "images/plaindosa.jpg" },
         { id: 2, name: "Egg dosa", price: 15, img: "images/eggdosa.jpg" },
-        { id: 3, name:"Masala dosa", price:10 , img:"images/masaladosa.jpg"},
-        { id: 4, name:"uthappam", price:10 , img:"images/uthappam.jpg"},
-        { id: 5, name:"Rava dosa", price:10 , img:"images/ravadosa.jpg"},
+        { id: 3, name: "Masala dosa", price: 10, img: "images/masaladosa.jpg" },
+        { id: 4, name: "Uthappam", price: 10, img: "images/uthappam.jpg" },
+        { id: 5, name: "Rava dosa", price: 10, img: "images/ravadosa.jpg" },
     ],
     restaurant2: [
         { id: 6, name: "Idly", price: 20, img: "images/idly.jpg" },
         { id: 7, name: "Podi idly", price: 12, img: "images/podiidly.jpg" },
-        { id: 8, name:"sambar idly", price:10 , img:"images/sambaridly.jpg"},
+        { id: 8, name: "Sambar idly", price: 10, img: "images/sambaridly.jpg" },
     ],
     restaurant3: [
         { id: 9, name: "Veg meal", price: 12, img: "images/vegmeal.jpg" },
@@ -32,6 +32,20 @@ function displayMenu(restaurant) {
                 <h3>${item.name}</h3>
                 <p>Price: $${item.price}</p>
                 <button id="add-to-cart-${item.id}" onclick="addToOrder(${item.id})">Add to Cart</button>
+                <div class="feedback-section">
+                    <label for="rating-${item.id}">Rating:</label>
+                    <select id="rating-${item.id}">
+                        <option value="0">Select Rating</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <input type="text" id="feedback-${item.id}" placeholder="Leave a comment">
+                    <button onclick="submitFeedback(${item.id})">Submit Feedback</button>
+                    <div id="feedback-list-${item.id}"></div>
+                </div>
             </div>
         `;
         menuContainer.appendChild(div);
@@ -110,6 +124,9 @@ document.getElementById('place-order').onclick = function() {
             document.getElementById('delivery-address').value = ''; // Clear address field
             document.getElementById('discount-code').value = ''; // Clear discount field
             updateOrderSummary();
+
+            // Show the feedback section
+            document.getElementById('feedback-section').style.display = 'block';
         } else {
             alert('Please enter a delivery address.');
         }
@@ -117,6 +134,26 @@ document.getElementById('place-order').onclick = function() {
         alert('Your order is empty!');
     }
 };
+
+// Function to submit feedback
+function submitFeedback(itemId) {
+    const rating = document.getElementById(`rating-${itemId}`).value;
+    const feedback = document.getElementById(`feedback-${itemId}`).value;
+    const feedbackList = document.getElementById(`feedback-list-${itemId}`);
+
+    if (rating === "0") {
+        alert('Please select a rating.');
+        return;
+    }
+
+    const feedbackItem = document.createElement('div');
+    feedbackItem.innerHTML = `<strong>Rating: ${rating}</strong> - ${feedback}`;
+    feedbackList.appendChild(feedbackItem);
+
+    // Clear input fields
+    document.getElementById(`rating-${itemId}`).value = "0";
+    document.getElementById(`feedback-${itemId}`).value = '';
+}
 
 // Event listener for restaurant selection
 document.getElementById('restaurant-select').addEventListener('change', function() {
