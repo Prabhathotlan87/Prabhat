@@ -1,7 +1,7 @@
 /* General Body Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #ffeb3b; /* Bright yellow background */
+    background-color: #e3f2fd; /* Light blue background */
     color: #333;
     margin: 0;
     padding: 20px;
@@ -10,16 +10,16 @@ body {
 .container {
     max-width: 600px;
     margin: auto;
-    background: #ff5722; /* Bright orange container */
+    background: #bbdefb; /* Light blue container */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); /* Deeper shadow for depth */
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Heading Styling */
 h1 {
     text-align: center;
-    color: #ffffff; /* White color for heading */
+    color: #0d47a1; /* Dark blue for heading */
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
@@ -34,15 +34,15 @@ textarea {
     width: 100%;
     height: 100px;
     padding: 14px;
-    border: 2px solid #ffd54f; /* Golden yellow border */
+    border: 2px solid #90caf9; /* Light blue border */
     border-radius: 10px;
     font-size: 16px;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 textarea:focus {
-    border-color: #ffffff; /* White border on focus */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* White glow effect */
+    border-color: #0d47a1; /* Dark blue border on focus */
+    box-shadow: 0 0 10px rgba(13, 71, 161, 0.5); /* Blue glow effect */
     outline: none;
 }
 
@@ -55,7 +55,7 @@ input[type="file"] {
 /* Button Styling */
 button {
     padding: 12px 24px;
-    background-color: #4caf50; /* Bright green button */
+    background-color: #64b5f6; /* Light blue button */
     color: white;
     border: none;
     border-radius: 8px;
@@ -66,14 +66,14 @@ button {
 }
 
 button:hover {
-    background-color: #388e3c; /* Darker green on hover */
+    background-color: #42a5f5; /* Darker blue on hover */
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(56, 142, 60, 0.3); /* Green shadow on hover */
+    box-shadow: 0 6px 12px rgba(66, 105, 245, 0.3); /* Blue shadow on hover */
 }
 
 /* Post Styling */
 .post {
-    border: 1px solid #ffd54f; /* Golden yellow border for posts */
+    border: 1px solid #90caf9; /* Light blue border for posts */
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
@@ -83,7 +83,7 @@ button:hover {
 
 .post:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(255, 213, 79, 0.3);
+    box-shadow: 0 8px 15px rgba(0, 122, 204, 0.3);
 }
 
 /* Styling for the post image */
@@ -102,7 +102,7 @@ button:hover {
 
 .post-date {
     font-size: 12px;
-    color: #ffeb3b; /* Bright yellow for post date */
+    color: #bbdefb; /* Light blue for post date */
     margin-left: 10px;
     font-style: italic;
 }
@@ -114,7 +114,7 @@ button:hover {
 
 .comment {
     padding: 10px 0;
-    border-top: 1px solid #ffd54f;
+    border-top: 1px solid #90caf9;
     font-size: 14px;
     color: #555;
 }
@@ -124,7 +124,7 @@ button:hover {
 }
 
 strong {
-    color: #ff5722; /* Orange for usernames */
+    color: #0d47a1; /* Dark blue for usernames */
 }
 
 /* Emoji Section */
@@ -145,13 +145,13 @@ strong {
 
 /* Follow/Unfollow Button */
 #followButton {
-    background-color: #2196f3; /* Bright blue for follow/unfollow */
+    background-color: #90caf9; /* Light blue for follow/unfollow */
     color: white;
     font-size: 14px;
 }
 
 #followButton:hover {
-    background-color: #1976d2; /* Darker blue on hover */
+    background-color: #64b5f6; /* Darker blue on hover */
 }
 
 /* Comment Inputs Styling */
@@ -165,11 +165,11 @@ strong {
 }
 
 .comments input[type="text"]:focus {
-    border-color: #ffeb3b; /* Bright yellow on focus */
+    border-color: #bbdefb; /* Light blue on focus */
 }
 
 .comments button {
-    background-color: #ffa07a; /* Light salmon button for comments */
+    background-color: #ffab91; /* Light coral button for comments */
     color: white;
     border: none;
     padding: 8px 12px;
@@ -180,7 +180,7 @@ strong {
 }
 
 .comments button:hover {
-    background-color: #ff6347; /* Tomato color on hover */
+    background-color: #ff8a65; /* Coral color on hover */
 }
 
 /* Responsive Design */
