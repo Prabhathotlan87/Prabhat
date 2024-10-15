@@ -36,22 +36,21 @@
             <input type="text" id="discount-code" placeholder="Enter discount code">
             <button id="place-order" disabled>Place Order</button>
         </section>
-        <section class="feedback-section" id="feedback-section" style="display:none;">
-         <h2>Rate Your Order</h2>
-         <label for="order-rating">Rating:</label>
-         <select id="order-rating">
-          <option value="0">Select Rating</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-         </select>
-         <input type="text" id="order-feedback" placeholder="Leave a comment">
-         <button id="submit-feedback">Submit Feedback</button>
-         <div id="feedback-list"></div>
-       </section>
 
+        <section class="feedback-section" id="feedback-section" style="display:none;">
+            <h2>Rate Your Order</h2>
+            <div id="feedback-list"></div>
+            <label for="order-rating">Rating:</label>
+            <div id="rating-stars">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+            </div>
+            <input type="text" id="order-feedback" placeholder="Leave a comment">
+            <button id="submit-feedback">Submit Feedback</button>
+        </section>
     </main>
 
     <footer>
