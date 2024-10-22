@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f4c3;
+    background-color: #e0f7fa; /* Light cyan */
     color: #333;
     margin: 0;
     padding: 20px;
@@ -9,36 +9,29 @@ body {
 .container {
     max-width: 600px;
     margin: auto;
-    background: #e1f5fe;
+    background: #ffffff; /* White background */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
 }
 
 h1, h2 {
     text-align: center;
-}
-
-.form-container, .products-container {
-    margin-bottom: 20px;
+    color: #00796b; /* Dark teal */
 }
 
 input[type="text"], input[type="number"], input[type="password"] {
     width: calc(100% - 20px);
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #81d4fa;
+    border: 1px solid #4db6ac; /* Teal border */
     border-radius: 5px;
-}
-
-input[type="file"] {
-    margin: 10px 0;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #4db6ac;
+    background-color: #00796b; /* Dark teal */
     color: white;
     border: none;
     border-radius: 5px;
@@ -47,15 +40,15 @@ button {
 }
 
 button:hover {
-    background-color: #26a69a;
+    background-color: #004d40; /* Darker teal */
 }
 
 .product {
-    border: 1px solid #81d4fa;
+    border: 1px solid #4db6ac; /* Teal border */
     border-radius: 5px;
     padding: 10px;
     margin: 10px 0;
-    background-color: #ffffff;
+    background-color: #f1f8e9; /* Light green */
 }
 
 .product img {
@@ -64,15 +57,32 @@ button:hover {
 }
 
 .logout-button {
-    background-color: #f44336;
+    background-color: #e53935; /* Red */
     display: none; /* Initially hidden */
 }
 
 .logout-button:hover {
-    background-color: #c62828;
+    background-color: #c62828; /* Darker red */
 }
 
 .error {
     color: red;
     text-align: center;
+}
+
+.user-info {
+    background-color: #fff3e0; /* Light orange */
+    border: 1px solid #ffb300; /* Orange border */
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.user-info h3 {
+    color: #ff5722; /* Deep orange */
+}
+
+.user-info p {
+    color: #bf360c; /* Darker orange */
 }
