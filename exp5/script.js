@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const loggedIn = localStorage.getItem("loggedIn") === "true";
     const logoutButton = document.getElementById('logoutButton');
     const productList = document.getElementById('productList');
+    const userInfoFormContainer = document.getElementById('userInfoFormContainer');
+    const userInfoDisplay = document.getElementById('userInfo');
 
     if (!loggedIn) {
         window.location.href = "login.html"; // Redirect to login if not logged in
@@ -11,7 +13,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
     logoutButton.addEventListener('click', function() {
         localStorage.removeItem("loggedIn");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userContact");
         window.location.href = "login.html"; // Redirect to login
+    });
+
+    document.getElementById('userInfoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const userName = document.getElementById('userName').value;
+        const userContact = document.getElementById('userContact').value;
+
+        // Store user info in local storage
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("userContact", userContact);
+
+        // Display user info
+        document.getElementById('displayUserName').textContent = userName;
+        document.getElementById('displayUserContact').textContent = userContact;
+        userInfoDisplay.style.display = 'block';
+        userInfoFormContainer.style.display = 'none';
     });
 
     document.getElementById('productForm').addEventListener('submit', function(event) {
@@ -24,11 +45,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const reader = new FileReader();
         reader.onloadend = function() {
+            const userName = localStorage.getItem("userName");
+            const userContact = localStorage.getItem("userContact");
+
             const product = {
                 name: productName,
                 description: productDescription,
                 price: productPrice,
                 image: reader.result,
+                userName: userName,
+                userContact: userContact
             };
 
             addProduct(product);
@@ -50,19 +76,19 @@ document.addEventListener("DOMContentLoaded", function() {
             <img src="${product.image}" alt="${product.name}">
             <p>${product.description}</p>
             <p><strong>Price: $${product.price}</strong></p>
+            <p><strong>Seller: ${product.userName}</strong></p>
+            <p>Contact: ${product.userContact}</p>
             <button class="buy-button">Buy</button>
             <button class="delete-button">Delete</button>
         `;
 
         productList.appendChild(productDiv);
 
-        // Add event listener for the Buy button
         const buyButton = productDiv.querySelector('.buy-button');
         buyButton.addEventListener('click', function() {
             alert(`You have bought ${product.name} for $${product.price}!`);
         });
 
-        // Add event listener for the Delete button
         const deleteButton = productDiv.querySelector('.delete-button');
         deleteButton.addEventListener('click', function() {
             productDiv.remove();
@@ -85,6 +111,16 @@ document.addEventListener("DOMContentLoaded", function() {
     function loadProductsFromLocalStorage() {
         const products = JSON.parse(localStorage.getItem("products")) || [];
         products.forEach(addProduct);
+        
+        // Check if user info is available
+        const userName = localStorage.getItem("userName");
+        const userContact = localStorage.getItem("userContact");
+        if (userName && userContact) {
+            document.getElementById('displayUserName').textContent = userName;
+            document.getElementById('displayUserContact').textContent = userContact;
+            userInfoDisplay.style.display = 'block';
+            userInfoFormContainer.style.display = 'none';
+        }
     }
 
     loadProductsFromLocalStorage();
