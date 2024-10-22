@@ -5,7 +5,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const password = document.getElementById('password').value;
 
     // Dummy authentication
-    if (username === "user" && password === "password") {
+    if (username === "Prabha" && password === "Prabha@123") {
         localStorage.setItem("loggedIn", "true");
         window.location.href = "index.html"; // Redirect to index
     } else {
