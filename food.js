@@ -14,6 +14,8 @@ const restaurantMenus = {
     restaurant3: [
         { id: 9, name: "Veg meal", price: 12, img: "images/vegmeal.jpg" },
         { id: 10, name: "Nonveg Meal", price: 8, img: "images/nonvegmeal.jpg" },
+        { id: 11, name: "Chicken Biriyani" , price:20, img:"images/chickenbiriyani.jpg"},
+        { id: 12, name: "MuttonBiryani" , price:25 , img: "images/muttonbiriyani.jpg"},
     ],
 };
 
