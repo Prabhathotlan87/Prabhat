@@ -18,6 +18,11 @@ const restaurantMenus = {
         { id: 12, name: "Chicken Biriyani" , price:20, img:"images/chickenbiriyani.jpg"},
         { id: 13, name: "MuttonBiryani" , price:25 , img: "images/muttonbiriyani.jpg"},
     ],
+   restaurant4: [
+       { id: 14,name: "" , price: , img :""},
+       { id: 15,name: "" , price: , img :""},
+       { id: 16,name: "" , price: , img :""},
+       { id: 17,name: "" , price: , img :""},
 };
 
 // Function to display menu items for the selected restaurant
