@@ -5,26 +5,26 @@ const restaurantMenus = {
         { id: 3, name: "Masala dosa", price: 10, img: "images/masaladosa.jpg" },
         { id: 4, name: "Uthappam", price: 10, img: "images/uthappam.jpg" },
         { id: 5, name: "Rava dosa", price: 10, img: "images/ravadosa.jpg" },
-        { id: 6, name: "Pongal", price:12, img: "images/pongal.jpg" },
+        { id: 6, name: "Pongal", price: 12, img: "images/pongal.jpg" },
     ],
     restaurant2: [
         { id: 7, name: "Idly", price: 20, img: "images/idly.jpg" },
         { id: 8, name: "Podi idly", price: 12, img: "images/podiidly.jpg" },
         { id: 9, name: "Sambar idly", price: 10, img: "images/sambaridly.jpg" },
-        { id: 10, name: "Rava Idly" , price:15, img: "images/ravaidly.jpg"},
+        { id: 10, name: "Rava Idly" , price: 15, img: "images/ravaidly.jpg"},
     ],
     restaurant3: [
         { id: 11, name: "Veg meal", price: 12, img: "images/vegmeal.jpg" },
         { id: 12, name: "Nonveg Meal", price: 8, img: "images/nonvegmeal.jpg" },
-        { id: 13, name: "Chicken Biriyani" , price:20, img:"images/chickenbiriyani.jpg"},
-        { id: 14, name: "MuttonBiryani" , price:25 , img: "images/muttonbiriyani.jpg"},
-        { id: 15, name: "Egg Biriyani" , price:25, img:"images/eggbiriyani.jpg"},
+        { id: 13, name: "Chicken Biriyani" , price: 20, img:"images/chickenbiriyani.jpg"},
+        { id: 14, name: "MuttonBiryani" , price: 25 , img: "images/muttonbiriyani.jpg"},
+        { id: 15, name: "Egg Biriyani" , price: 25, img:"images/eggbiriyani.jpg"},
     ],
    restaurant4: [
-       { id: 16,name: "Veg Fried Rice" , price:20 , img :"images/vegrice.jpg"},
-       { id: 17,name: "Egg Fried Rice" , price:22 , img :"images/eggrice.jpg"},
-       { id: 18,name: "Chicken Fried Rice" , price:25 , img :"images/chickenrice.jpg"},
-       { id: 19,name: "Paneer Fried Rice" , price:35 , img :"images/paneerrice.jpg"},
+       { id: 16,name: "Veg Fried Rice" , price: 20 , img :"images/vegrice.jpg"},
+       { id: 17,name: "Egg Fried Rice" , price: 22 , img :"images/eggrice.jpg"},
+       { id: 18,name: "Chicken Fried Rice" , price: 25 , img :"images/chickenrice.jpg"},
+       { id: 19,name: "Paneer Fried Rice" , price: 35 , img :"images/paneerrice.jpg"},
 };
 
 // Function to display menu items for the selected restaurant
