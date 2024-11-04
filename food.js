@@ -25,6 +25,7 @@ const restaurantMenus = {
        { id: 17,name: "Egg Fried Rice" , price: 22 , img :"images/eggrice.jpg"},
        { id: 18,name: "Chicken Fried Rice" , price: 25 , img :"images/chickenrice.jpg"},
        { id: 19,name: "Paneer Fried Rice" , price: 35 , img :"images/paneerrice.jpg"},
+    ],
 };
 
 // Function to display menu items for the selected restaurant
