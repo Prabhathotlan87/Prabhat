@@ -11,20 +11,20 @@ const restaurantMenus = {
         { id: 7, name: "Idly", price: 20, img: "images/idly.jpg" },
         { id: 8, name: "Podi idly", price: 12, img: "images/podiidly.jpg" },
         { id: 9, name: "Sambar idly", price: 10, img: "images/sambaridly.jpg" },
-        { id: 10, name: "Rava Idly" , price: 15, img: "images/ravaidly.jpg"},
+        { id: 10, name: "Rava Idly", price: 15, img: "images/ravaidly.jpg" },
     ],
     restaurant3: [
         { id: 11, name: "Veg meal", price: 12, img: "images/vegmeal.jpg" },
         { id: 12, name: "Nonveg Meal", price: 8, img: "images/nonvegmeal.jpg" },
-        { id: 13, name: "Chicken Biriyani" , price: 20, img:"images/chickenbiriyani.jpg"},
-        { id: 14, name: "MuttonBiryani" , price: 25 , img: "images/muttonbiriyani.jpg"},
-        { id: 15, name: "Egg Biriyani" , price: 25, img:"images/eggbiriyani.jpg"},
+        { id: 13, name: "Chicken Biriyani", price: 20, img: "images/chickenbiriyani.jpg" },
+        { id: 14, name: "Mutton Biryani", price: 25, img: "images/muttonbiriyani.jpg" },
+        { id: 15, name: "Egg Biriyani", price: 25, img: "images/eggbiriyani.jpg" },
     ],
-   restaurant4: [
-       { id: 16,name: "Veg Fried Rice" , price: 20 , img :"images/vegrice.jpg"},
-       { id: 17,name: "Egg Fried Rice" , price: 22 , img :"images/eggrice.jpg"},
-       { id: 18,name: "Chicken Fried Rice" , price: 25 , img :"images/chickenrice.jpg"},
-       { id: 19,name: "Paneer Fried Rice" , price: 35 , img :"images/paneerrice.jpg"},
+    restaurant4: [
+        { id: 16, name: "Veg Fried Rice", price: 20, img: "images/vegrice.jpg" },
+        { id: 17, name: "Egg Fried Rice", price: 22, img: "images/eggrice.jpg" },
+        { id: 18, name: "Chicken Fried Rice", price: 25, img: "images/chickenrice.jpg" },
+        { id: 19, name: "Paneer Fried Rice", price: 35, img: "images/paneerrice.jpg" },
     ],
 };
 
@@ -34,19 +34,23 @@ function displayMenu(restaurant) {
     menuContainer.innerHTML = ''; // Clear previous items
     const menuItems = restaurantMenus[restaurant];
 
-    menuItems.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'menu-item';
-        div.innerHTML = `
-            <img src="${item.img}" alt="${item.name}">
-            <div>
-                <h3>${item.name}</h3>
-                <p>Price: $${item.price}</p>
-                <button id="add-to-cart-${item.id}" onclick="addToOrder(${item.id})">Add to Cart</button>
-            </div>
-        `;
-        menuContainer.appendChild(div);
-    });
+    if (menuItems) {
+        menuItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'menu-item';
+            div.innerHTML = `
+                <img src="${item.img}" alt="${item.name}">
+                <div>
+                    <h3>${item.name}</h3>
+                    <p>Price: $${item.price}</p>
+                    <button id="add-to-cart-${item.id}" onclick="addToOrder(${item.id})">Add to Cart</button>
+                </div>
+            `;
+            menuContainer.appendChild(div);
+        });
+    } else {
+        menuContainer.innerHTML = '<p>No menu items available.</p>';
+    }
 }
 
 // Initialize user info and check login
@@ -78,8 +82,10 @@ let order = [];
 function addToOrder(id) {
     const restaurant = document.getElementById('restaurant-select').value;
     const item = restaurantMenus[restaurant].find(item => item.id === id);
-    order.push(item);
-    updateOrderSummary();
+    if (item) {
+        order.push(item);
+        updateOrderSummary();
+    }
 }
 
 // Function to update order summary
@@ -107,7 +113,7 @@ function updateOrderSummary() {
 document.getElementById('place-order').onclick = function() {
     const address = document.getElementById('delivery-address').value;
     const discountCode = document.getElementById('discount-code').value;
-    
+
     if (order.length > 0) {
         if (address) {
             let total = order.reduce((sum, item) => sum + item.price, 0);
@@ -172,3 +178,4 @@ document.getElementById('restaurant-select').addEventListener('change', function
 
 // Initial call to check user and load menu
 initUser();
+
