@@ -9,6 +9,8 @@
 <body>
     <div class="container">
         <h1>Buy & Sell Used Products</h1>
+        
+        <!-- User Information -->
         <div id="userInfo" class="user-info" style="display: none;">
             <h3>Welcome, <span id="displayUserName"></span></h3>
             <p>Contact: <span id="displayUserContact"></span></p>
@@ -25,6 +27,7 @@
 
         <button id="logoutButton" class="logout-button" style="display:none;">Logout</button>
 
+        <!-- Product Listing Form -->
         <div class="form-container">
             <h2>List Your Product</h2>
             <form id="productForm">
@@ -32,13 +35,37 @@
                 <input type="text" id="productDescription" placeholder="Description" required>
                 <input type="number" id="productPrice" placeholder="Price" required>
                 <input type="file" id="productImage" accept="image/*" required>
+                <input type="text" id="sellerName" placeholder="Seller Name" required>
+                <input type="text" id="sellerAddress" placeholder="Seller Address" required>
+                <input type="text" id="sellerContact" placeholder="Seller Contact" required>
                 <button type="submit">Add Product</button>
             </form>
         </div>
 
+        <!-- Available Products -->
         <div class="products-container">
             <h2>Available Products</h2>
             <div id="productList"></div>
+        </div>
+
+        <!-- Buy Modal to collect Buyer Details and Feedback -->
+        <div id="buyModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h3>Buyer Details</h3>
+                <form id="buyerDetailsForm">
+                    <label for="buyerName">Your Name:</label>
+                    <input type="text" id="buyerName" placeholder="Enter your name" required><br>
+                    
+                    <label for="buyerContact">Contact Number:</label>
+                    <input type="text" id="buyerContact" placeholder="Enter your contact number" required><br>
+
+                    <label for="buyerAddress">Your Address:</label>
+                    <input type="text" id="buyerAddress" placeholder="Enter your address" required><br>
+                    
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 
