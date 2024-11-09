@@ -42,7 +42,7 @@ function displayMenu(restaurant) {
                 <img src="${item.img}" alt="${item.name}">
                 <div>
                     <h3>${item.name}</h3>
-                    <p>Price: $${item.price}</p>
+                    <p>Price: ₹${item.price}</p> <!-- Changed $ to ₹ -->
                     <button id="add-to-cart-${item.id}" onclick="addToOrder(${item.id})">Add to Cart</button>
                 </div>
             `;
@@ -50,41 +50,6 @@ function displayMenu(restaurant) {
         });
     } else {
         menuContainer.innerHTML = '<p>No menu items available.</p>';
-    }
-}
-
-// Initialize user info and check login
-function initUser() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const userInfoDiv = document.getElementById('user-info');
-
-    if (user) {
-        userInfoDiv.innerHTML = `Welcome, ${user.name} (${user.phone})`;
-        enableAddToCartButtons();
-        displayMenu(document.getElementById('restaurant-select').value); // Load default restaurant
-    } else {
-        window.location.href = 'login.html';
-    }
-}
-
-// Function to enable "Add to Cart" buttons
-function enableAddToCartButtons() {
-    const buttons = document.querySelectorAll('button[id^="add-to-cart-"]');
-    buttons.forEach(button => {
-        button.disabled = false;
-    });
-}
-
-// Order array
-let order = [];
-
-// Function to add item to order
-function addToOrder(id) {
-    const restaurant = document.getElementById('restaurant-select').value;
-    const item = restaurantMenus[restaurant].find(item => item.id === id);
-    if (item) {
-        order.push(item);
-        updateOrderSummary();
     }
 }
 
@@ -96,13 +61,13 @@ function updateOrderSummary() {
 
     order.forEach(item => {
         const div = document.createElement('div');
-        div.innerHTML = `${item.name} - $${item.price}`;
+        div.innerHTML = `${item.name} - ₹${item.price}`; // Changed $ to ₹
         orderContainer.appendChild(div);
         total += item.price;
     });
 
     const totalDiv = document.createElement('div');
-    totalDiv.innerHTML = `<strong>Total: $${total}</strong>`;
+    totalDiv.innerHTML = `<strong>Total: ₹${total}</strong>`; // Changed $ to ₹
     orderContainer.appendChild(totalDiv);
 
     // Enable the place order button if there are items in the order
@@ -122,7 +87,7 @@ document.getElementById('place-order').onclick = function() {
                 alert('Discount applied: 10% off!');
             }
 
-            alert(`Order placed successfully!\nDelivery Address: ${address}\nTotal Amount: $${total.toFixed(2)}`);
+            alert(`Order placed successfully!\nDelivery Address: ${address}\nTotal Amount: ₹${total.toFixed(2)}`); // Changed $ to ₹
             order = []; // Reset order
             document.getElementById('delivery-address').value = ''; // Clear address field
             document.getElementById('discount-code').value = ''; // Clear discount field
@@ -136,39 +101,6 @@ document.getElementById('place-order').onclick = function() {
     } else {
         alert('Your order is empty!');
     }
-};
-
-// Handle star rating
-const stars = document.querySelectorAll('.star');
-let selectedRating = 0;
-
-stars.forEach(star => {
-    star.addEventListener('click', function() {
-        selectedRating = this.getAttribute('data-value');
-        stars.forEach(s => {
-            s.style.color = s.getAttribute('data-value') <= selectedRating ? '#ffcc00' : '#fff';
-        });
-    });
-});
-
-// Function to submit feedback
-document.getElementById('submit-feedback').onclick = function() {
-    const feedback = document.getElementById('order-feedback').value;
-    const feedbackList = document.getElementById('feedback-list');
-
-    if (selectedRating === "0") {
-        alert('Please select a rating.');
-        return;
-    }
-
-    const feedbackItem = document.createElement('div');
-    feedbackItem.innerHTML = `<strong>Rating: ${selectedRating}</strong> - ${feedback}`;
-    feedbackList.appendChild(feedbackItem);
-
-    // Clear input fields
-    selectedRating = 0;
-    stars.forEach(s => s.style.color = '#fff'); // Reset star color
-    document.getElementById('order-feedback').value = '';
 };
 
 // Event listener for restaurant selection
