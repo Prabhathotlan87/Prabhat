@@ -4,80 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #e0f7fa, #ffe0b2);
+            background: linear-gradient(45deg, #ff9a8b, #ff6a88, #d48a8c);
+            background-size: 600% 600%;
+            animation: gradientAnimation 15s ease infinite;
             color: #333;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         h1 {
             text-align: center;
             margin-top: 50px;
-            font-size: 2.5em;
-            color: #007BFF;
+            font-size: 3em;
+            color: #ffffff;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); /* Increased shadow for better readability */
         }
 
         h4 {
             text-align: center;
-            color: #555;
+            color: #ffffff; /* White color for better contrast */
             margin-top: 10px;
-            font-weight: normal;
-        }
-
-        a {
-            display: inline-block;
-            text-decoration: none;
-            color: white;
-            background-color: #28a745;
-            padding: 12px 20px;
-            border-radius: 5px;
-            text-align: center;
-            margin: 20px auto;
-            width: 220px;
-            font-size: 18px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        a:hover {
-            background-color: #218838;
-            transform: translateY(-3px);
+            font-weight: 600; /* Slightly bolder */
+            font-size: 1.3em; /* Slightly larger font size */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Subtle shadow for better visibility */
         }
 
         .container {
             max-width: 600px;
             margin: 0 auto;
             text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85); /* Increased opacity for better contrast */
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increased shadow for better separation */
+        }
+
+        .experiment-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #ff6f61;
+            padding: 15px 25px;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        a:hover {
+            background-color: #d04b47;
+            transform: translateY(-4px);
         }
 
         .footer {
             position: fixed;
-            bottom: 10px;
+            bottom: 20px;
             width: 100%;
             text-align: center;
             font-size: 14px;
-            color: #777;
+            color: #444; /* Darker text for footer */
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .footer a {
+            color: #ff6f61;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            a {
+                width: 80%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>FULL STACK EXPERIMENT</h1>
-        <h4>Done by Prabha</h4>
-        <a href="https://prabhathotlan87.github.io/Prabhat/ex1/index.html">Portfolio</a>
-        <a href="https://prabhathotlan87.github.io/Prabhat/ex2/index.html">ToDo List</a>
-        <a href="https://prabhathotlan87.github.io/Prabhat/exp3/index.html">Microblogging</a>
-        <a href="https://prabhathotlan87.github.io/Prabhat/exp4/login.html">Food Delivery</a>
-        <a href="https://prabhathotlan87.github.io/Prabhat/exp5/login.html" alt="Online Shoping"> Online Shoping</a> 
+        <h4>Created by Prabha</h4>
+        <div class="experiment-links">
+            <a href="https://prabhathotlan87.github.io/Prabhat/ex1/index.html">Portfolio</a>
+            <a href="https://prabhathotlan87.github.io/Prabhat/ex2/index.html">ToDo List</a>
+            <a href="https://prabhathotlan87.github.io/Prabhat/exp3/index.html">Microblogging</a>
+            <a href="https://prabhathotlan87.github.io/Prabhat/exp4/login.html">Food Delivery</a>
+            <a href="https://prabhathotlan87.github.io/Prabhat/exp5/login.html" alt="Online Shopping">Online Shopping</a>
+        </div>
     </div>
     <div class="footer">
-        &copy; 2024 Prabha's Projects
+        <p>&copy; 2024 Prabha's Projects | <a href="https://github.com/prabhathotlan87" target="_blank">GitHub</a></p>
     </div>
 </body>
 </html>
