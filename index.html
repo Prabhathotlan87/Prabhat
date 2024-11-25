@@ -28,62 +28,63 @@
             margin-top: 50px;
             font-size: 3em;
             color: #ffffff;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); /* Increased shadow for better readability */
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
         }
 
         h4 {
             text-align: center;
-            color: #ffffff; /* White color for better contrast */
+            color: #ffffff;
             margin-top: 10px;
-            font-weight: 600; /* Slightly bolder */
-            font-size: 1.3em; /* Slightly larger font size */
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Subtle shadow for better visibility */
+            font-weight: 600;
+            font-size: 1.3em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
         .container {
-            max-width: 600px;
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.85); /* Increased opacity for better contrast */
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increased shadow for better separation */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .experiment-links {
+        .experiment-columns {
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* Space between the two columns horizontally */
+        }
+
+        .column {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            gap: 15px; /* Space between items vertically */
         }
 
-        a {
+        .column a {
             text-decoration: none;
             color: #fff;
             background-color: #ff6f61;
-            padding: 15px 25px;
-            border-radius: 30px;
-            width: 100%;
-            max-width: 300px;
+            padding: 12px 20px; /* Balanced padding for links */
+            border-radius: 8px;
             text-align: center;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             transition: transform 0.3s ease, background-color 0.3s ease;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
         }
 
-        a:hover {
+        .column a:hover {
             background-color: #d04b47;
-            transform: translateY(-4px);
+            transform: scale(1.05);
         }
 
         .footer {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
+            margin-top: 30px;
             text-align: center;
             font-size: 14px;
-            color: #444; /* Darker text for footer */
+            color: #444;
             font-family: 'Roboto', sans-serif;
         }
 
@@ -106,8 +107,15 @@
                 padding: 20px;
             }
 
-            a {
-                width: 80%;
+            .experiment-columns {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px; /* Adjust gap for smaller screens */
+            }
+
+            .column {
+                width: 100%;
+                gap: 10px; /* Reduce vertical spacing on smaller screens */
             }
         }
     </style>
@@ -116,19 +124,26 @@
     <div class="container">
         <h1>FULL STACK EXPERIMENT</h1>
         <h4>Created by Prabha</h4>
-        <div class="experiment-links">
-            <a href="https://prabhathotlan87.github.io/Prabhat/ex1/index.html">Portfolio</a>
-            <a href="https://prabhathotlan87.github.io/Prabhat/ex2/index.html">ToDo List</a>
-            <a href="https://prabhathotlan87.github.io/Prabhat/exp3/index.html">Microblogging</a>
-            <a href="https://prabhathotlan87.github.io/Prabhat/exp4/login.html">Food Delivery</a>
-            <a href="https://prabhathotlan87.github.io/Prabhat/exp5/login.html" alt="Online Shopping">Online Shopping</a>
-            <a href="https://prabhathotlan87.github.io/Prabhat/exp6/login.html">Leave Management System</a>
-            <a href="https://prabhathotlan87.github.io/Prabhat/exp7/login.html">Project Management System</a>
-            <a href="https://prabhathotlan87.github.io/Prabhat/exp8/index.html">Online Survey Application</a>
+        <!-- Two columns with balanced spacing -->
+        <div class="experiment-columns">
+            <!-- First column -->
+            <div class="column">
+                <a href="https://prabhathotlan87.github.io/Prabhat/ex1/index.html">Portfolio</a>
+                <a href="https://prabhathotlan87.github.io/Prabhat/ex2/index.html">ToDo List</a>
+                <a href="https://prabhathotlan87.github.io/Prabhat/exp3/index.html">Microblogging</a>
+                <a href="https://prabhathotlan87.github.io/Prabhat/exp4/login.html">Food Delivery</a>
+            </div>
+            <!-- Second column -->
+            <div class="column">
+                <a href="https://prabhathotlan87.github.io/Prabhat/exp5/login.html">Online Shopping</a>
+                <a href="https://prabhathotlan87.github.io/Prabhat/exp6/login.html">Leave Management System</a>
+                <a href="https://prabhathotlan87.github.io/Prabhat/exp7/login.html">Project Management System</a>
+                <a href="https://prabhathotlan87.github.io/Prabhat/exp8/index.html">Online Survey Application</a>
+            </div>
         </div>
     </div>
     <div class="footer">
-        <p>&copy; 2024 Prabha's Projects | <a href="https://github.com/prabhathotlan87" target="_blank">GitHub</a></p>
+        <p>&copy; 2024 Prabha's Projects</p>
     </div>
 </body>
 </html>
