@@ -28,17 +28,17 @@ const restaurantMenus = {
     ],
 };
 
-// Order array to hold the cart items
+// Array to hold cart items
 let order = [];
 
-// Function to display menu items for the selected restaurant
+// Function to display menu items
 function displayMenu(restaurant) {
     const menuContainer = document.getElementById("menu-items");
     menuContainer.innerHTML = ""; // Clear previous items
-    const menuItems = restaurantMenus[restaurant];
 
+    const menuItems = restaurantMenus[restaurant];
     if (menuItems) {
-        menuItems.forEach((item) => {
+        menuItems.forEach(item => {
             const div = document.createElement("div");
             div.className = "menu-item";
             div.innerHTML = `
@@ -56,29 +56,29 @@ function displayMenu(restaurant) {
     }
 }
 
-// Function to add an item to the cart
+// Function to add item to cart
 function addToOrder(itemId, restaurant) {
     const menuItems = restaurantMenus[restaurant];
-    const item = menuItems.find((menuItem) => menuItem.id === itemId);
+    const item = menuItems.find(item => item.id === itemId);
 
     if (item) {
         order.push(item);
         updateOrderSummary();
-        alert(`${item.name} added to your cart!`);
+        alert(`${item.name} has been added to your cart.`);
     } else {
-        alert("Item not found.");
+        alert("Item not found!");
     }
 }
 
-// Function to update order summary
+// Function to update the order summary
 function updateOrderSummary() {
     const orderContainer = document.getElementById("order-summary");
-    orderContainer.innerHTML = ""; // Clear current order
+    orderContainer.innerHTML = ""; // Clear existing items
     let total = 0;
 
-    order.forEach((item) => {
+    order.forEach(item => {
         const div = document.createElement("div");
-        div.innerHTML = `${item.name} - ₹${item.price}`;
+        div.textContent = `${item.name} - ₹${item.price}`;
         orderContainer.appendChild(div);
         total += item.price;
     });
@@ -87,46 +87,44 @@ function updateOrderSummary() {
     totalDiv.innerHTML = `<strong>Total: ₹${total}</strong>`;
     orderContainer.appendChild(totalDiv);
 
-    // Enable the place order button if there are items in the order
+    // Enable the "Place Order" button if cart is not empty
     document.getElementById("place-order").disabled = order.length === 0;
 }
 
-// Function to handle order placement
+// Handle order placement
 document.getElementById("place-order").onclick = function () {
     const address = document.getElementById("delivery-address").value;
     const discountCode = document.getElementById("discount-code").value;
 
-    if (order.length > 0) {
-        if (address) {
-            let total = order.reduce((sum, item) => sum + item.price, 0);
-            if (discountCode === "DISCOUNT10") {
-                total *= 0.9; // Apply a 10% discount
-                alert("Discount applied: 10% off!");
-            }
-
-            alert(`Order placed successfully!\nDelivery Address: ${address}\nTotal Amount: ₹${total.toFixed(2)}`);
-            order = []; // Reset order
-            document.getElementById("delivery-address").value = ""; // Clear address field
-            document.getElementById("discount-code").value = ""; // Clear discount field
-            updateOrderSummary();
-
-            // Show the feedback section
-            document.getElementById("feedback-section").style.display = "block";
-        } else {
-            alert("Please enter a delivery address.");
-        }
-    } else {
+    if (order.length === 0) {
         alert("Your cart is empty!");
+        return;
     }
+
+    if (!address) {
+        alert("Please enter a delivery address.");
+        return;
+    }
+
+    let total = order.reduce((sum, item) => sum + item.price, 0);
+    if (discountCode === "DISCOUNT10") {
+        total *= 0.9; // Apply a 10% discount
+        alert("Discount applied: 10% off!");
+    }
+
+    alert(`Order placed successfully!\nDelivery Address: ${address}\nTotal Amount: ₹${total.toFixed(2)}`);
+    order = []; // Reset the cart
+    document.getElementById("delivery-address").value = ""; // Clear address input
+    document.getElementById("discount-code").value = ""; // Clear discount code input
+    updateOrderSummary();
+    document.getElementById("feedback-section").style.display = "block"; // Show feedback section
 };
 
-// Event listener for restaurant selection
+// Initialize the app
 document.getElementById("restaurant-select").addEventListener("change", function () {
     displayMenu(this.value);
 });
-
-// Initialize user and menu
 function initUser() {
-    displayMenu("restaurant1"); // Load the first restaurant's menu by default
+    displayMenu("restaurant1"); // Load default restaurant menu
 }
 initUser();
