@@ -15,7 +15,7 @@ const restaurantMenus = {
     ],
     restaurant3: [
         { id: 11, name: "Veg meal", price: 80, img: "images/vegmeal.jpg" },
-        { id: 12, name: "Nonveg Meal", price:500, img: "images/nonvegmeal.jpg" },
+        { id: 12, name: "Nonveg Meal", price: 500, img: "images/nonvegmeal.jpg" },
         { id: 13, name: "Chicken Biriyani", price: 200, img: "images/chickenbiriyani.jpg" },
         { id: 14, name: "Mutton Biryani", price: 250, img: "images/muttonbiriyani.jpg" },
         { id: 15, name: "Egg Biriyani", price: 200, img: "images/eggbiriyani.jpg" },
@@ -28,85 +28,105 @@ const restaurantMenus = {
     ],
 };
 
+// Order array to hold the cart items
+let order = [];
+
 // Function to display menu items for the selected restaurant
 function displayMenu(restaurant) {
-    const menuContainer = document.getElementById('menu-items');
-    menuContainer.innerHTML = ''; // Clear previous items
+    const menuContainer = document.getElementById("menu-items");
+    menuContainer.innerHTML = ""; // Clear previous items
     const menuItems = restaurantMenus[restaurant];
 
     if (menuItems) {
-        menuItems.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'menu-item';
+        menuItems.forEach((item) => {
+            const div = document.createElement("div");
+            div.className = "menu-item";
             div.innerHTML = `
                 <img src="${item.img}" alt="${item.name}">
                 <div>
                     <h3>${item.name}</h3>
-                    <p>Price: ₹${item.price}</p> <!-- Changed $ to ₹ -->
-                    <button id="add-to-cart-${item.id}" onclick="addToOrder(${item.id})">Add to Cart</button>
+                    <p>Price: ₹${item.price}</p>
+                    <button onclick="addToOrder(${item.id}, '${restaurant}')">Add to Cart</button>
                 </div>
             `;
             menuContainer.appendChild(div);
         });
     } else {
-        menuContainer.innerHTML = '<p>No menu items available.</p>';
+        menuContainer.innerHTML = "<p>No menu items available.</p>";
+    }
+}
+
+// Function to add an item to the cart
+function addToOrder(itemId, restaurant) {
+    const menuItems = restaurantMenus[restaurant];
+    const item = menuItems.find((menuItem) => menuItem.id === itemId);
+
+    if (item) {
+        order.push(item);
+        updateOrderSummary();
+        alert(`${item.name} added to your cart!`);
+    } else {
+        alert("Item not found.");
     }
 }
 
 // Function to update order summary
 function updateOrderSummary() {
-    const orderContainer = document.getElementById('order-summary');
-    orderContainer.innerHTML = ''; // Clear current order
+    const orderContainer = document.getElementById("order-summary");
+    orderContainer.innerHTML = ""; // Clear current order
     let total = 0;
 
-    order.forEach(item => {
-        const div = document.createElement('div');
-        div.innerHTML = `${item.name} - ₹${item.price}`; // Changed $ to ₹
+    order.forEach((item) => {
+        const div = document.createElement("div");
+        div.innerHTML = `${item.name} - ₹${item.price}`;
         orderContainer.appendChild(div);
         total += item.price;
     });
 
-    const totalDiv = document.createElement('div');
-    totalDiv.innerHTML = `<strong>Total: ₹${total}</strong>`; // Changed $ to ₹
+    const totalDiv = document.createElement("div");
+    totalDiv.innerHTML = `<strong>Total: ₹${total}</strong>`;
     orderContainer.appendChild(totalDiv);
 
     // Enable the place order button if there are items in the order
-    document.getElementById('place-order').disabled = order.length === 0;
+    document.getElementById("place-order").disabled = order.length === 0;
 }
 
 // Function to handle order placement
-document.getElementById('place-order').onclick = function() {
-    const address = document.getElementById('delivery-address').value;
-    const discountCode = document.getElementById('discount-code').value;
+document.getElementById("place-order").onclick = function () {
+    const address = document.getElementById("delivery-address").value;
+    const discountCode = document.getElementById("discount-code").value;
 
     if (order.length > 0) {
         if (address) {
             let total = order.reduce((sum, item) => sum + item.price, 0);
             if (discountCode === "DISCOUNT10") {
                 total *= 0.9; // Apply a 10% discount
-                alert('Discount applied: 10% off!');
+                alert("Discount applied: 10% off!");
             }
 
-            alert(`Order placed successfully!\nDelivery Address: ${address}\nTotal Amount: ₹${total.toFixed(2)}`); // Changed $ to ₹
+            alert(`Order placed successfully!\nDelivery Address: ${address}\nTotal Amount: ₹${total.toFixed(2)}`);
             order = []; // Reset order
-            document.getElementById('delivery-address').value = ''; // Clear address field
-            document.getElementById('discount-code').value = ''; // Clear discount field
+            document.getElementById("delivery-address").value = ""; // Clear address field
+            document.getElementById("discount-code").value = ""; // Clear discount field
             updateOrderSummary();
 
             // Show the feedback section
-            document.getElementById('feedback-section').style.display = 'block';
+            document.getElementById("feedback-section").style.display = "block";
         } else {
-            alert('Please enter a delivery address.');
+            alert("Please enter a delivery address.");
         }
     } else {
-        alert('Your order is empty!');
+        alert("Your cart is empty!");
     }
 };
 
 // Event listener for restaurant selection
-document.getElementById('restaurant-select').addEventListener('change', function() {
+document.getElementById("restaurant-select").addEventListener("change", function () {
     displayMenu(this.value);
 });
 
-// Initial call to check user and load menu
+// Initialize user and menu
+function initUser() {
+    displayMenu("restaurant1"); // Load the first restaurant's menu by default
+}
 initUser();
