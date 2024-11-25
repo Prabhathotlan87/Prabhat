@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Management System</title>
+    <link rel="stylesheet" href="leave.css">
+</head>
+<body>
+    <header>
+        <h1>Leave Management System</h1>
+    </header>
+
+    <main>
+        <section class="leave-form">
+            <h2>Apply for Leave</h2>
+            <form id="apply-leave-form">
+                <label for="leave-type">Leave Type:</label>
+                <select id="leave-type" required>
+                    <option value="">Select Leave Type</option>
+                    <option value="casual">Casual Leave</option>
+                    <option value="medical">Medical Leave</option>
+                    <option value="earned">Earned Leave</option>
+                    <option value="maternity">Maternity Leave</option>
+                </select>
+
+                <label for="leave-days">Number of Days:</label>
+                <input type="number" id="leave-days" placeholder="Enter number of days" required>
+
+                <label for="leave-reason">Reason for Leave:</label>
+                <textarea id="leave-reason" rows="4" placeholder="Enter your reason here..." required></textarea>
+
+                <button type="submit">Apply Leave</button>
+            </form>
+        </section>
+
+        <section class="leave-status">
+            <h2>Available Leaves</h2>
+            <ul id="available-leaves">
+                <li>Casual Leave: <span id="casual-leave">12</span> days</li>
+                <li>Medical Leave: <span id="medical-leave">10</span> days</li>
+                <li>Earned Leave: <span id="earned-leave">15</span> days</li>
+                <li>Maternity Leave: <span id="maternity-leave">30</span> days</li>
+            </ul>
+        </section>
+
+        <section class="applied-leaves">
+            <h2>Applied Leaves</h2>
+            <ul id="applied-leaves-list">
+                <!-- Dynamically populated list of applied leaves -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Leave Management System</p>
+    </footer>
+
+    <script src="leave.js"></script>
+</body>
+</html>
