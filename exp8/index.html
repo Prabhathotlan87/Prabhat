@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Booking Survey</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      font-family: 'Arial', sans-serif;
+    }
+    .survey-container {
+      margin-top: 50px;
+    }
+    .question-card {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+    }
+    .btn-submit {
+      background-color: #ff7f50;
+      color: white;
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .thank-you-message {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .question-options {
+      margin-top: 10px;
+    }
+    .answer-card {
+      background-color: #333;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .answer-card h5 {
+      font-size: 18px;
+    }
+    .answer-text {
+      font-size: 16px;
+      color: #ff7f50;
+    }
+    .answer-card .correct {
+      color: #28a745;
+    }
+    .answer-card .incorrect {
+      color: #dc3545;
+    }
+    .btn-back {
+      background-color: #0072ff;
+      color: white;
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container survey-container">
+    <h1 class="text-center">Welcome to the Ticket Booking Survey!</h1>
+    <div id="survey-questions">
+      <!-- Questions will be injected here dynamically -->
+    </div>
+    <button class="btn-submit" onclick="submitSurvey()">Submit Survey</button>
+  </div>
+
+  <div id="thank-you-message" class="thank-you-message" style="display: none;">
+    <h3>Thank you for your responses!</h3>
+    <p>Your answers:</p>
+    <div id="answers-list"></div>
+    <button class="btn-back" onclick="restartSurvey()">Take Survey Again</button>
+  </div>
+
+  <script>
+    // Sample list of questions with multiple choice options
+    const questions = [
+      {
+        question: "How did you hear about our ticket booking platform?",
+        options: ["Social Media", "Friend", "Advertisement", "Other"]
+      },
+      {
+        question: "How satisfied are you with our booking process?",
+        options: ["Very Satisfied", "Satisfied", "Neutral", "Dissatisfied", "Very Dissatisfied"]
+      },
+      {
+        question: "What feature would you like to see added?",
+        options: ["Better Search Functionality", "Discount Offers", "Mobile App", "More Payment Options"]
+      },
+      {
+        question: "Would you recommend our service to others?",
+        options: ["Yes", "No", "Maybe"]
+      },
+      {
+        question: "What event are you most likely to book tickets for?",
+        options: ["Concerts", "Sports Events", "Theater Plays", "Comedy Shows", "Other"]
+      }
+    ];
+
+    let userResponses = [];
+    let answeredQuestions = [];
+
+    // Function to load random questions with multiple choice options
+    function loadQuestions() {
+      const randomQuestions = [];
+      while (randomQuestions.length < 5) {
+        const question = questions[Math.floor(Math.random() * questions.length)];
+        if (!randomQuestions.some(q => q.question === question.question)) {
+          randomQuestions.push(question);
+        }
+      }
+
+      const surveyDiv = document.getElementById('survey-questions');
+      randomQuestions.forEach((question, index) => {
+        let optionsHtml = '';
+        question.options.forEach((option, i) => {
+          optionsHtml += `
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="question${index}" id="question${index}-option${i}" value="${option}" required>
+              <label class="form-check-label" for="question${index}-option${i}">
+                ${option}
+              </label>
+            </div>
+          `;
+        });
+
+        surveyDiv.innerHTML += `
+          <div class="question-card">
+            <h5>${question.question}</h5>
+            <div class="question-options">
+              ${optionsHtml}
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Load the random questions when the page loads
+    window.onload = loadQuestions;
+
+    // Function to handle survey submission
+    function submitSurvey() {
+      const answersList = [];
+      let allAnswered = true;
+      
+      for (let i = 0; i < 5; i++) {
+        const selectedOption = document.querySelector(`input[name="question${i}"]:checked`);
+        if (selectedOption) {
+          answersList.push(selectedOption.value);
+          answeredQuestions.push({ question: questions[i].question, answer: selectedOption.value });
+        } else {
+          allAnswered = false;
+          break;
+        }
+      }
+
+      if (allAnswered) {
+        // Hide the survey questions and show the thank you message
+        document.querySelector('.survey-container').style.display = 'none';
+        document.getElementById('thank-you-message').style.display = 'block';
+
+        // Display user's answers
+        const answersListElement = document.getElementById('answers-list');
+        answeredQuestions.forEach((answered, index) => {
+          const answerCard = document.createElement('div');
+          answerCard.classList.add('answer-card');
+          answerCard.innerHTML = `
+            <h5>Question: ${answered.question}</h5>
+            <p class="answer-text">Answer: ${answered.answer}</p>
+          `;
+          answersListElement.appendChild(answerCard);
+        });
+      } else {
+        alert("Please answer all the questions.");
+      }
+    }
+
+    // Function to restart the survey
+    function restartSurvey() {
+      location.reload(); // Reload the page to restart the survey
+    }
+  </script>
+</body>
+</html>
